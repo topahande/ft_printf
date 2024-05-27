@@ -6,75 +6,112 @@
 /*   By: htopa <htopa@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:04:50 by htopa             #+#    #+#             */
-/*   Updated: 2024/05/24 16:10:09 by htopa            ###   ########.fr       */
+/*   Updated: 2024/05/27 15:48:56 by htopa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ft_putchar_fd(char c, int fd)
+static int	print_formatted(const char *format, va_list args)
 {
-	write(fd, &c, 1);
-}
+	int	count;
 
-static void	ft_putstr_fd(char *s, int fd)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-}
-
-static void	ft_putnbr_fd(int n, int fd)
-{
-	if (n == -2147483648)
-		write(fd, "-2147483648", 11);
-	else
-	{
-		if (n < 0)
-		{
-			ft_putchar_fd('-', fd);
-			n = -n;
-		}
-		if (n > 9)
-			ft_putnbr_fd(n / 10, fd);
-		ft_putchar_fd(n % 10 + '0', fd);
-	}
-}
-
-static int	ft_putpercent(void)
-{
-	write(1, "%", 1);
-	return (0);
+	if (*format == 'd' || *format == 'i')
+		count = ft_putnbr(va_arg(args, int));
+	if (*format == 'c')
+		count = ft_putchar(va_arg(args, int));
+	if (*format == 's')
+		count = ft_putstr(va_arg(args, char *));
+	if (*format == '%')
+		count = ft_putpercent();
+	if (*format == 'u')
+		count = ft_putunsignednbr(va_arg(args, int));
+	if (*format == 'X')
+		count = ft_puthexadecimal(va_arg(args, int),
+				"0123456789ABCDEF");
+	if (*format == 'x')
+		count = ft_puthexadecimal(va_arg(args, int),
+				"0123456789abcdef");
+	if (*format == 'p')
+		count = ft_putpointer(va_arg(args, void *));
+	return (count);
 }
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
+	int		count;
 
+	count = 0;
 	va_start(args, format);
 	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
 			format++;
-			if (*format == 'd')
-				ft_putnbr_fd(va_arg(args, int), 1);
-			if (*format == 'c')
-				ft_putchar_fd(va_arg(args, int), 1);
-			if (*format == 's')
-				ft_putstr_fd(va_arg(args, char *), 1);
-			if (*format == '%')
-				ft_putpercent();
+			count = count + print_formatted(format, args);
 		}
 		else
-			ft_putchar_fd(*format, 1);
+			count = count + ft_putchar(*format);
 		format++;
 	}
 	va_end(args);
-	return (1);
+	return (count);
 }
+
+/*
+#include <stdio.h>
+int main(void)
+{
+
+	int *p;
+
+	*p = 12;
+
+	printf("%p\n", p);
+	ft_putpointer(p);
+
+	//printf("%X\n",-42);
+	//ft_printf("%X\n",-42);
+	//printf("%d", printf("%X",-42));
+	printf("%u", ft_puthexadeciamal(-42, "0123456789abcdef"));
+	//printf("%d", ft_printf("%X",-42));
+
+
+	
+	//printf("%d", printf(" %u ", -1));
+	//printf("%d", printf(" %u ", -1));
+	//printf("%c", '\n');
+	printf("%d\n",printf("%u\n", -1));
+	printf("%d\n",ft_putunsignednbr(-1));
+	printf("%d\n",printf("%u\n", 1));
+	printf("%d\n",ft_putunsignednbr(1));
+	
+	//printf("%d", ft_printf(" %u ", -1));
+
+	printf("%d", printf(" NULL %s NULL ", NULL));
+	printf("%d", ft_printf(" NULL %s NULL ", NULL));
+	printf("%d", ft_putstr(NULL));
+	printf("%d",ft_printf("%c\n", '0'));
+	printf("%d",ft_printf(" %c \n", '0'));
+	printf("%d",ft_printf(" %c\n", '0' - 256));
+	printf("%d",ft_printf("%c \n", '0' + 256));
+	printf("%d",ft_printf(" %c %c %c \n", '0', 0, '1'));
+	printf("%d",ft_printf(" %c %c %c \n", ' ', ' ', ' '));
+	printf("%d",ft_printf(" %c %c %c \n", '1', '2', '3'));
+	printf("%d",ft_printf(" %c %c %c \n", '2', '1', 0));
+	printf("%d",ft_printf(" %c %c %c \n", 0, '1', '2'));
+	printf("%c", '\n');
+	ft_printf("%c\n", '0');
+	ft_printf(" %c \n", '0');
+	ft_printf(" %c\n", '0' - 256);
+	ft_printf("%c \n", '0' + 256);
+	ft_printf(" %c %c %c \n", '0', 0, '1');
+	ft_printf(" %c %c %c \n", ' ', ' ', ' ');
+	ft_printf(" %c %c %c \n", '1', '2', '3');
+	ft_printf(" %c %c %c \n", '2', '1', 0);
+	ft_printf(" %c %c %c \n", 0, '1', '2');
+	
+	return (0);
+}
+*/

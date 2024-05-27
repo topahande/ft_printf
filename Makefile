@@ -11,6 +11,21 @@
 #******************************************************************************#
 
 SRCS = ft_printf.c \
+	ft_putchar_fd.c \
+	ft_putchar.c \
+	ft_puthexadecimal_pointer.c \
+	ft_puthexadecimal.c \
+	ft_putnbr_base_pointer.c \
+	ft_putnbr_base.c \
+	ft_putnbr_fd.c \
+	ft_putnbr.c \
+	ft_putpercent.c \
+	ft_putpointer.c \
+	ft_putstr_fd.c \
+	ft_putstr.c \
+	ft_putunsignednbr_fd.c \
+	ft_putunsignednbr.c \
+	ft_strlen.c \
 
 NAME = libftprintf.a
 
