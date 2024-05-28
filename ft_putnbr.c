@@ -15,10 +15,13 @@
 int	ft_putnbr(int c)
 {
 	int	i;
+	int	write_check;
 
-	ft_putnbr_fd(c, 1);
 	if (c == -2147483648)
-		return (11);
+		return (ft_putnbr_fd(c, 1));
+	write_check = ft_putnbr_fd(c, 1);
+	if (write_check == -1)
+		return (-1);
 	if (c < 0)
 	{
 		i = 2;

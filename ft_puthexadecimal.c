@@ -17,7 +17,9 @@ int	ft_puthexadecimal(int n, char *base)
 	int				i;
 	unsigned int	nbr;
 
-	nbr = ft_putnbr_base(n, base);
+	nbr = (unsigned int)ft_putnbr_base(n, base);
+	if (nbr == (unsigned int)(-1))
+		return (-1);
 	i = 1;
 	while (nbr >= 16)
 	{

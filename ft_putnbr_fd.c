@@ -12,19 +12,30 @@
 
 #include "ft_printf.h"
 
-void	ft_putnbr_fd(int n, int fd)
+int	ft_putnbr_fd(int n, int fd)
 {
+	int	write_check;
+
 	if (n == -2147483648)
-		write(fd, "-2147483648", 11);
+		return (write(fd, "-2147483648", 11));
 	else
 	{
 		if (n < 0)
 		{
-			ft_putchar_fd('-', fd);
+			write_check = ft_putchar_fd('-', fd);
+			if (write_check == -1)
+				return (-1);
 			n = -n;
 		}
 		if (n > 9)
-			ft_putnbr_fd(n / 10, fd);
-		ft_putchar_fd(n % 10 + '0', fd);
+		{
+			write_check = ft_putnbr_fd(n / 10, fd);
+			if (write_check == -1)
+				return (-1);
+		}
+		write_check = ft_putchar_fd(n % 10 + '0', fd);
+		if (write_check == -1)
+			return (-1);
 	}
+	return (1);
 }

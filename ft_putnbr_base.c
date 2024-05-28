@@ -12,13 +12,20 @@
 
 #include "ft_printf.h"
 
-unsigned int	ft_putnbr_base(int n, char *base)
+unsigned long int	ft_putnbr_base(int n, char *base)
 {
-	unsigned int	nbr;
+	unsigned long int	nbr;
+	unsigned long int	write_check;
 
-	nbr = (unsigned int)n;
+	nbr = (unsigned long int)n;
 	if (nbr >= 16)
-		ft_putnbr_base(nbr / 16, base);
-	write(1, &base[nbr % 16], 1);
+	{
+		write_check = ft_putnbr_base(nbr / 16, base);
+		if (write_check == (unsigned long int)(-1))
+			return ((unsigned long int)(-1));
+	}
+	write_check = write(1, &base[nbr % 16], 1);
+	if (write_check == (unsigned long int)(-1))
+		return ((unsigned long int)(-1));
 	return (nbr);
 }

@@ -41,6 +41,7 @@ int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		count;
+	int		check_write;
 
 	count = 0;
 	va_start(args, format);
@@ -49,10 +50,13 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			count = count + print_formatted(format, args);
+			check_write = print_formatted(format, args);
 		}
 		else
-			count = count + ft_putchar(*format);
+			check_write = ft_putchar(*format);
+		if (check_write == -1)
+			return (-1);
+		count = count + check_write;
 		format++;
 	}
 	va_end(args);

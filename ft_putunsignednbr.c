@@ -16,9 +16,12 @@ int	ft_putunsignednbr(int n)
 {
 	unsigned int	c;
 	int				i;
+	int				write_check;
 
 	c = (unsigned int)n;
-	ft_putunsignednbr_fd(c, 1);
+	write_check = ft_putunsignednbr_fd(c, 1);
+	if (write_check == -1)
+		return (-1);
 	i = 1;
 	while (c > 9)
 	{
