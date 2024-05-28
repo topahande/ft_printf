@@ -25,12 +25,12 @@ static int	print_formatted(const char *format, va_list args)
 	if (*format == '%')
 		count = ft_putpercent();
 	if (*format == 'u')
-		count = ft_putunsignednbr(va_arg(args, int));
+		count = ft_putunsignednbr(va_arg(args, unsigned int));
 	if (*format == 'X')
-		count = ft_puthexadecimal(va_arg(args, int),
+		count = ft_puthexadecimal(va_arg(args, unsigned int),
 				"0123456789ABCDEF");
 	if (*format == 'x')
-		count = ft_puthexadecimal(va_arg(args, int),
+		count = ft_puthexadecimal(va_arg(args, unsigned int),
 				"0123456789abcdef");
 	if (*format == 'p')
 		count = ft_putpointer(va_arg(args, void *));

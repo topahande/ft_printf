@@ -12,20 +12,18 @@
 
 #include "ft_printf.h"
 
-int	ft_putunsignednbr(int n)
+int	ft_putunsignednbr(unsigned int n)
 {
-	unsigned int	c;
 	int				i;
 	int				write_check;
 
-	c = (unsigned int)n;
-	write_check = ft_putunsignednbr_fd(c, 1);
+	write_check = ft_putunsignednbr_fd(n, 1);
 	if (write_check == -1)
 		return (-1);
 	i = 1;
-	while (c > 9)
+	while (n > 9)
 	{
-		c = c / 10;
+		n = n / 10;
 		i++;
 	}
 	return (i);

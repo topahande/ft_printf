@@ -12,12 +12,12 @@
 
 #include "ft_printf.h"
 
-int	ft_puthexadecimal(int n, char *base)
+int	ft_puthexadecimal(unsigned int n, char *base)
 {
 	int				i;
 	unsigned int	nbr;
 
-	nbr = (unsigned int)ft_putnbr_base(n, base);
+	nbr = (unsigned int)ft_putnbr_base((int)n, base);
 	if (nbr == (unsigned int)(-1))
 		return (-1);
 	i = 1;
