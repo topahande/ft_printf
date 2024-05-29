@@ -17,18 +17,20 @@ int	ft_putnbr(int c)
 	int	i;
 	int	write_check;
 
+	i = 1;
 	if (c == -2147483648)
-		return (ft_putnbr_fd(c, 1));
-	write_check = ft_putnbr_fd(c, 1);
-	if (write_check == -1)
-		return (-1);
+		return (write(1, "-2147483648", 11));
 	if (c < 0)
 	{
-		i = 2;
-		c = (-c);
+		write_check = ft_putchar('-');
+		if (write_check == -1)
+			return (-1);
+		c = -c;
+		i++;
 	}
-	else
-		i = 1;
+	write_check = ft_putnbr_positive(c);
+	if (write_check == -1)
+		return (-1);
 	while (c > 9)
 	{
 		c = c / 10;

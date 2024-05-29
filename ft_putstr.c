@@ -14,7 +14,18 @@
 
 int	ft_putstr(char *s)
 {
+	int	i;
+	int	write_check;
+
 	if (s == NULL)
 		s = "(null)";
-	return (ft_putstr_fd(s, 1));
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write_check = ft_putchar(s[i]);
+		if (write_check == -1)
+			return (-1);
+		i++;
+	}
+	return (i);
 }

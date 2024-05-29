@@ -12,17 +12,17 @@
 
 #include "ft_printf.h"
 
-int	ft_putunsignednbr_fd(unsigned int n, int fd)
+int	ft_putunsignednbr_fd(unsigned int n)
 {
 	int	write_check;
 
 	if (n > 9)
 	{
-		write_check = ft_putunsignednbr_fd(n / 10, fd);
+		write_check = ft_putunsignednbr_fd(n / 10);
 		if (write_check == -1)
 			return (-1);
 	}
-	write_check = ft_putchar_fd(n % 10 + '0', fd);
+	write_check = ft_putchar(n % 10 + '0');
 	if (write_check == -1)
 		return (-1);
 	return (1);

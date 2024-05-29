@@ -14,5 +14,5 @@
 
 int	ft_putchar(int c)
 {
-	return (ft_putchar_fd(c, 1));
+	return (write(1, &c, 1));
 }

@@ -17,7 +17,7 @@ int	ft_putunsignednbr(unsigned int n)
 	int				i;
 	int				write_check;
 
-	write_check = ft_putunsignednbr_fd(n, 1);
+	write_check = ft_putunsignednbr_fd(n);
 	if (write_check == -1)
 		return (-1);
 	i = 1;
