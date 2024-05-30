@@ -12,9 +12,7 @@
 
 SRCS = ft_printf.c \
 	ft_putchar.c \
-	ft_puthexadecimal_pointer.c \
 	ft_puthexadecimal.c \
-	ft_putnbr_base_pointer.c \
 	ft_putnbr_base.c \
 	ft_putnbr_positive.c \
 	ft_putnbr.c \

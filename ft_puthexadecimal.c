@@ -12,18 +12,18 @@
 
 #include "ft_printf.h"
 
-int	ft_puthexadecimal(unsigned int n, char *base)
+int	ft_puthexadecimal(unsigned long int n, char *base)
 {
-	int				i;
-	unsigned int	nbr;
+	int	i;
+	int	write_check;
 
-	nbr = (unsigned int)ft_putnbr_base((int)n, base);
-	if (nbr == (unsigned int)(-1))
+	write_check = ft_putnbr_base(n, base);
+	if (write_check == -1)
 		return (-1);
 	i = 1;
-	while (nbr >= 16)
+	while (n >= 16)
 	{
-		nbr = nbr / 16;
+		n = n / 16;
 		i++;
 	}
 	return (i);

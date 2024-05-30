@@ -12,6 +12,23 @@
 
 #include "ft_printf.h"
 
+int	ft_putnbr_base(unsigned long int n, char *base)
+{
+	int	write_check;
+
+	if (n >= 16)
+	{
+		write_check = ft_putnbr_base(n / 16, base);
+		if (write_check == -1)
+			return (-1);
+	}
+	write_check = write(1, &base[n % 16], 1);
+	if (write_check == -1)
+		return (-1);
+	return (1);
+}
+
+/*
 unsigned long int	ft_putnbr_base(int n, char *base)
 {
 	unsigned long int	nbr;
@@ -29,3 +46,4 @@ unsigned long int	ft_putnbr_base(int n, char *base)
 		return ((unsigned long int)(-1));
 	return (nbr);
 }
+*/

@@ -25,11 +25,8 @@ int					ft_putpointer(void *p);
 int					ft_putpercent(void);
 int					ft_putnbr(int c);
 int					ft_putnbr_positive(int n);
-unsigned long int	ft_putnbr_base(int n, char *base);
-unsigned long int	ft_putnbr_base_pointer(unsigned long int nbr, char *base);
-int					ft_puthexadecimal(unsigned int n, char *base);
-int					ft_puthexadecimal_pointer(unsigned long int nbr,
-						char *base);
+int					ft_putnbr_base(unsigned long int n, char *base);
+int					ft_puthexadecimal(unsigned long int n, char *base);
 int					ft_putchar(int c);
 
 #endif
