@@ -33,9 +33,7 @@ static int	print_formatted(const char *format, va_list args)
 		count = ft_puthexadecimal(va_arg(args, unsigned int), 'x');
 	else if (*format == 'p')
 		count = ft_putpointer(va_arg(args, void *));
-	else if (*format == '\0')
-		count = 0;
-	else
+	else if (*format != '\0')
 		count = ft_putchar(*format);
 	return (count);
 }
@@ -58,7 +56,8 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			check_write = print_formatted(++format, args);
+			format++;
+			check_write = print_formatted(format, args);
 			if (*format == '\0')
 				format--;
 		}
