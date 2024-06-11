@@ -55,7 +55,10 @@ int	ft_printf(const char *format, ...)
 		else
 			check_write = ft_putchar(*format);
 		if (check_write == -1)
+		{
+			va_end(args);
 			return (-1);
+		}
 		count = count + check_write;
 		format++;
 	}
