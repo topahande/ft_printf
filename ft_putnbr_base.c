@@ -27,23 +27,3 @@ int	ft_putnbr_base(unsigned long int n, char *base)
 		return (-1);
 	return (1);
 }
-
-/*
-unsigned long int	ft_putnbr_base(int n, char *base)
-{
-	unsigned long int	nbr;
-	unsigned long int	write_check;
-
-	nbr = (unsigned long int)n;
-	if (nbr >= 16)
-	{
-		write_check = ft_putnbr_base(nbr / 16, base);
-		if (write_check == (unsigned long int)(-1))
-			return ((unsigned long int)(-1));
-	}
-	write_check = write(1, &base[nbr % 16], 1);
-	if (write_check == (unsigned long int)(-1))
-		return ((unsigned long int)(-1));
-	return (nbr);
-}
-*/

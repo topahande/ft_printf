@@ -19,7 +19,7 @@ SRCS = ft_printf.c \
 	ft_putpercent.c \
 	ft_putpointer.c \
 	ft_putstr.c \
-	ft_putunsignednbr_fd.c \
+	ft_putunsignednbr_check.c \
 	ft_putunsignednbr.c \
 
 NAME = libftprintf.a
