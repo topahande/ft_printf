@@ -6,7 +6,7 @@
 /*   By: htopa <htopa@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:04:50 by htopa             #+#    #+#             */
-/*   Updated: 2024/05/27 15:48:56 by htopa            ###   ########.fr       */
+/*   Updated: 2024/06/11 21:04:57 by htopa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,22 @@ static int	print_formatted(const char *format, va_list args)
 	else if (*format == 'u')
 		count = ft_putunsignednbr(va_arg(args, unsigned int));
 	else if (*format == 'X')
-		count = ft_puthexadecimal(va_arg(args, unsigned int),
-				"0123456789ABCDEF");
+		count = ft_puthexadecimal(va_arg(args, unsigned int), 'X');
 	else if (*format == 'x')
-		count = ft_puthexadecimal(va_arg(args, unsigned int),
-				"0123456789abcdef");
+		count = ft_puthexadecimal(va_arg(args, unsigned int), 'x');
 	else if (*format == 'p')
 		count = ft_putpointer(va_arg(args, void *));
+	else if (*format == '\0')
+		count = 0;
 	else
-		count = write(1, &format[0], 1);
+		count = ft_putchar(*format);
 	return (count);
+}
+
+static int	clean_va(va_list args)
+{
+	va_end(args);
+	return (-1);
 }
 
 int	ft_printf(const char *format, ...)
@@ -52,21 +58,14 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			if (*(format + 1) == '\0')
-				check_write = 0;
-			else
-			{
-				format++;
-				check_write = print_formatted(format, args);
-			}
+			check_write = print_formatted(++format, args);
+			if (*format == '\0')
+				format--;
 		}
 		else
 			check_write = ft_putchar(*format);
 		if (check_write == -1)
-		{
-			va_end(args);
-			return (-1);
-		}
+			return (clean_va(args));
 		count = count + check_write;
 		format++;
 	}

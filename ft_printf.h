@@ -25,7 +25,7 @@ int	ft_putpercent(void);
 int	ft_putnbr(int c);
 int	ft_putnbr_positive(int n);
 int	ft_putnbr_base(unsigned long int n, char *base);
-int	ft_puthexadecimal(unsigned long int n, char *base);
+int	ft_puthexadecimal(unsigned long int n, char type);
 int	ft_putchar(int c);
 
 #endif

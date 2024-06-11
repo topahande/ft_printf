@@ -19,8 +19,7 @@ int	ft_putpointer(void *p)
 	write_check = write(1, "0x", 2);
 	if (write_check == -1)
 		return (-1);
-	write_check = ft_puthexadecimal((unsigned long int)p,
-			"0123456789abcdef");
+	write_check = ft_puthexadecimal((unsigned long int)p, 'x');
 	if (write_check == -1)
 		return (-1);
 	return (write_check + 2);
