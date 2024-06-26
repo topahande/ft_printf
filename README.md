@@ -11,3 +11,9 @@ Reimplementation of the original printf function for the following conversions:
 - %x Prints a number in hexadecimal (base 16) lowercase format.
 - %X Prints a number in hexadecimal (base 16) uppercase format.
 - %% Prints a percent sign.
+
+Running
+``
+make
+``
+builds the library libftprintf.a in the root repository, which then enables to use the function ft_printf() in a similar way with the original printf() function.
